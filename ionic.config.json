@@ -1,0 +1,7 @@
+{
+  "name": "kartuucapan",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

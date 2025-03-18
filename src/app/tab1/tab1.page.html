@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-title>
+      Love Message
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="love-background">
+  <div class="love-container">
+    <!-- Background floating hearts -->
+    <div class="floating-hearts">
+      <div class="heart" *ngFor="let heart of hearts"></div>
+    </div>
+    
+    <!-- Decorative corner elements -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+    
+    <!-- Floating cupids -->
+    <div class="cupid cupid-left"></div>
+    <div class="cupid cupid-right"></div>
+    
+    <!-- Message container with decorative border -->
+    <div class="message-container">
+      <!-- Love letter design elements -->
+      <div class="letter-seal"></div>
+      
+      <h2 class="love-message">Haiii cayangnyaa masss 💚</h2>
+      <p class="love-text">Ada kejutan buat kamu nih.</p>
+      <p class="love-text">Penasaran? Yuk klik di bawah ini</p>
+
+      <!-- Ornamental divider -->
+      <div class="love-divider">
+        <span class="divider-heart"></span>
+      </div>
+      
+      <div class="button-container">
+        <ion-button color="danger" shape="round" size="large" (click)="goToTab2()" class="mulai-button">
+          Mulai
+          <div class="button-hearts">
+            <div class="button-heart" *ngFor="let i of [1,2,3,4,5]"></div>
+          </div>
+        </ion-button>
+      </div>
+    </div>
+    
+    <!-- Falling rose petals effect -->
+    <div class="rose-petals">
+      <div class="petal" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></div>
+    </div>
+    
+    <!-- Ribbon decorations -->
+    <div class="ribbon ribbon-left"></div>
+    <div class="ribbon ribbon-right"></div>
+  </div>
+</ion-content>

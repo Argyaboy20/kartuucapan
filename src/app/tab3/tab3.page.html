@@ -1,0 +1,142 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="love-primary">
+    <ion-title>
+      Our Love Story
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="love-background">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Our Love Story</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Floating Hearts -->
+  <div class="floating-hearts">
+    <div class="heart heart-1">❤️</div>
+    <div class="heart heart-2">💖</div>
+    <div class="heart heart-3">💕</div>
+    <div class="heart heart-4">💘</div>
+    <div class="heart heart-5">💗</div>
+    <div class="heart heart-6">❣️</div>
+  </div>
+
+  <!-- Anniversary Counter -->
+  <ion-card class="love-card">
+    <div class="card-ribbon"></div>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center love-title">Our Anniversary</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="anniversary-container">
+        <div class="heart-border">
+          <div class="anniversary-date ion-text-center">
+            <p class="subtitle">Since August 26, 2024</p>
+            <h1>{{ daysCount }} Days</h1>
+            <p class="love-quote">of endless love and cherished moments</p>
+            <div class="monthly-reminder ion-text-center" *ngIf="showMonthlyReminder">
+              <p class="reminder-text">💖 Happy {{ monthsCount }}-Month Anniversary! 💖</p>
+              <p class="reminder-date">{{ nextMonthlyDate | date:'longDate' }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="next-milestone ion-text-center">
+          <p><span class="milestone-label">Next milestone:</span> {{ nextMilestone }}</p>
+          <p><span class="days-count">{{ daysToNextMilestone }}</span> days to go</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Photo Gallery -->
+  <ion-card class="love-card photo-card">
+    <div class="card-ribbon"></div>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center love-title">Our Beautiful Moments</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="photo-gallery">
+        <div class="gallery-item" *ngFor="let photo of photos; let i = index" (click)="openPhotoModal(i)">
+          <div class="heart-frame">
+            <img [src]="photo.thumbnail" [alt]="photo.description">
+          </div>
+          <div class="photo-date">{{ photo.date }}</div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Quote Card -->
+  <ion-card class="love-card quote-card">
+    <ion-card-content>
+      <div class="quote-container">
+        <div class="quote-mark">"</div>
+        <p class="love-quote-text">Love is not about how many days, months, or years you have been together. Love is
+          about how much you love each other every single day.</p>
+        <div class="quote-mark closing-mark">"</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 3D Photos Container -->
+  <div class="couple-photos-container">
+    <div class="partner-photo left">
+      <div class="photo-heart-frame">
+        <img src="assets/farras.png" alt="Farras" (click)="rotate3DPhoto('left')">
+      </div>
+      <div class="partner-name">Farras</div>
+    </div>
+
+    <div class="connecting-hearts">
+      <div class="heart-connect">💞</div>
+    </div>
+
+    <div class="partner-photo right">
+      <div class="photo-heart-frame">
+        <img src="assets/ria.png" alt="Ria" (click)="rotate3DPhoto('right')">
+      </div>
+      <div class="partner-name">Ria</div>
+    </div>
+  </div>
+
+  <!-- Photo Modal (Hidden by default) -->
+  <ion-modal [isOpen]="isModalOpen" [cssClass]="'photo-modal'" (didDismiss)="closePhotoModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="love-primary">
+          <ion-title>{{ currentPhoto?.date }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closePhotoModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content">
+        <div class="ion-padding">
+          <div class="modal-image-container">
+            <img [src]="currentPhoto?.fullsize" [alt]="currentPhoto?.description" class="modal-image">
+          </div>
+          <div class="photo-description">
+            <p>{{ currentPhoto?.description }}</p>
+          </div>
+
+          <div class="navigation-buttons">
+            <ion-button color="love-secondary" (click)="prevPhoto()" [disabled]="currentIndex === 0">
+              <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+
+            <ion-text class="photo-counter">{{ currentIndex + 1 }} / {{ photos.length }}</ion-text>
+
+            <ion-button color="love-secondary" (click)="nextPhoto()" [disabled]="currentIndex === photos.length - 1">
+              <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

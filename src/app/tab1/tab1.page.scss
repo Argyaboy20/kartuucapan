@@ -1,0 +1,417 @@
+.love-background {
+    --background: linear-gradient(135deg, #ffcdd2, #f8bbd0, #e1bee7);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .love-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+  
+  /* Enhanced message container with decorative border */
+  .message-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f06292;
+    z-index: 10;
+    position: relative;
+    
+    /* Decorative dotted border inside main border */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px dashed #e91e63;
+      border-radius: 14px;
+      pointer-events: none;
+    }
+  }
+  
+  /* Love letter seal */
+  .letter-seal {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: #e91e63;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' opacity='0.9'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  /* Ornamental divider */
+  .love-divider {
+    position: relative;
+    height: 20px;
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e91e63, transparent);
+      width: 40%;
+    }
+    
+    &::before {
+      left: 0;
+    }
+    
+    &::after {
+      right: 0;
+    }
+  }
+  
+  .divider-heart {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e91e63' opacity='0.8'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Corner decorations */
+  .corner-decoration {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0.6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23c2185b' stroke-width='2'%3E%3Cpath d='M10,90 Q30,70 20,50 Q10,30 30,10 M10,90 Q20,70 50,80 Q80,90 90,70 Q80,50 90,30 Q80,10 50,20 Q20,30 30,10' /%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  
+  .top-left {
+    top: 20px;
+    left: 20px;
+    transform: rotate(0deg);
+  }
+  
+  .top-right {
+    top: 20px;
+    right: 20px;
+    transform: rotate(90deg);
+  }
+  
+  .bottom-left {
+    bottom: 20px;
+    left: 20px;
+    transform: rotate(270deg);
+  }
+  
+  .bottom-right {
+    bottom: 20px;
+    right: 20px;
+    transform: rotate(180deg);
+  }
+  
+  /* Cupid decorations */
+  .cupid {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23e91e63' opacity='0.7'%3E%3Ccircle cx='50' cy='30' r='20'/%3E%3Cpath d='M35,50 L65,50 L50,80 Z'/%3E%3Cpath d='M30,40 Q0,30 20,20'/%3E%3Cpath d='M70,40 Q100,30 80,20'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+  }
+  
+  .cupid-left {
+    top: 40%;
+    left: 5%;
+    animation: float-side 15s ease-in-out infinite;
+  }
+  
+  .cupid-right {
+    top: 30%;
+    right: 5%;
+    transform: scaleX(-1);
+    animation: float-side 18s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+  
+  @keyframes float-side {
+    0%, 100% {
+      transform: translateY(0) scaleX(-1);
+    }
+    50% {
+      transform: translateY(30px) scaleX(-1);
+    }
+  }
+  
+  /* Falling rose petals */
+  .rose-petals {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e91e63' opacity='0.6'%3E%3Cpath d='M12,2 C8,2 4,5 4,10 C4,15 8,20 12,22 C16,20 20,15 20,10 C20,5 16,2 12,2 Z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: fall-rotate 10s linear infinite;
+  }
+  
+  @keyframes fall-rotate {
+    0% {
+      transform: translateY(-20px) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) translateX(50px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  /* Position petals at different locations */
+  .petal:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+  .petal:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 1s; }
+  .petal:nth-child(3) { left: 30%; animation-duration: 11s; animation-delay: 2s; }
+  .petal:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: 0.5s; }
+  .petal:nth-child(5) { left: 50%; animation-duration: 13s; animation-delay: 1.5s; }
+  .petal:nth-child(6) { left: 60%; animation-duration: 16s; animation-delay: 0.7s; }
+  .petal:nth-child(7) { left: 70%; animation-duration: 12s; animation-delay: 2.5s; }
+  .petal:nth-child(8) { left: 80%; animation-duration: 15s; animation-delay: 1.2s; }
+  .petal:nth-child(9) { left: 90%; animation-duration: 13s; animation-delay: 0.3s; }
+  .petal:nth-child(10) { left: 15%; animation-duration: 14s; animation-delay: 1.8s; }
+  
+  /* Ribbon decorations */
+  .ribbon {
+    position: absolute;
+    width: 30px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 150' fill='%23e91e63' opacity='0.6'%3E%3Cpath d='M5,0 C5,50 25,50 25,75 C25,100 5,100 5,150 M25,0 C25,50 5,50 5,75 C5,100 25,100 25,150'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  
+  .ribbon-left {
+    top: 20%;
+    left: 10%;
+    animation: ribbon-wave 8s ease-in-out infinite;
+  }
+  
+  .ribbon-right {
+    top: 20%;
+    right: 10%;
+    transform: scaleX(-1);
+    animation: ribbon-wave 8s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+  
+  @keyframes ribbon-wave {
+    0%, 100% {
+      transform: rotate(-5deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+  
+  /* Original styles below - keeping them intact */
+  .love-message {
+    color: #d81b60;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .love-text {
+    color: #c2185b;
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  
+  .button-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  ion-button.mulai-button {
+    --border-radius: 50px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-weight: bold;
+    margin-top: 10px;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.3s ease;
+  }
+  
+  ion-button.mulai-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .button-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .button-container:hover .button-hearts {
+    opacity: 1;
+  }
+  
+  .button-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e91e63' opacity='0.8'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+  
+  .button-heart:nth-child(1) {
+    top: -30px;
+    left: 10%;
+    animation: button-float 2s ease-out infinite;
+    animation-delay: 0.1s;
+  }
+  
+  .button-heart:nth-child(2) {
+    top: -30px;
+    left: 30%;
+    animation: button-float 2.2s ease-out infinite;
+    animation-delay: 0.3s;
+  }
+  
+  .button-heart:nth-child(3) {
+    top: -30px;
+    left: 50%;
+    animation: button-float 1.8s ease-out infinite;
+    animation-delay: 0.5s;
+  }
+  
+  .button-heart:nth-child(4) {
+    top: -30px;
+    left: 70%;
+    animation: button-float 2.4s ease-out infinite;
+    animation-delay: 0.2s;
+  }
+  
+  .button-heart:nth-child(5) {
+    top: -30px;
+    left: 90%;
+    animation: button-float 2s ease-out infinite;
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes button-float {
+    0% {
+      transform: translateY(0) scale(0.5);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-60px) scale(1);
+      opacity: 0;
+    }
+  }
+  
+  .floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e91e63' opacity='0.6'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: float 20s linear infinite;
+    opacity: 0.7;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) scale(0.5) rotate(0deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-100px) scale(1.2) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  /* Heart positions with predefined values */
+  .heart:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; transform: scale(0.6); }
+  .heart:nth-child(2) { left: 15%; animation-duration: 18s; animation-delay: 1s; transform: scale(0.8); }
+  .heart:nth-child(3) { left: 25%; animation-duration: 20s; animation-delay: 2s; transform: scale(0.7); }
+  .heart:nth-child(4) { left: 35%; animation-duration: 12s; animation-delay: 0.5s; transform: scale(0.9); }
+  .heart:nth-child(5) { left: 45%; animation-duration: 16s; animation-delay: 1.5s; transform: scale(0.6); }
+  .heart:nth-child(6) { left: 55%; animation-duration: 19s; animation-delay: 2.5s; transform: scale(1.0); }
+  .heart:nth-child(7) { left: 65%; animation-duration: 14s; animation-delay: 0.2s; transform: scale(0.7); }
+  .heart:nth-child(8) { left: 75%; animation-duration: 17s; animation-delay: 1.2s; transform: scale(0.8); }
+  .heart:nth-child(9) { left: 85%; animation-duration: 21s; animation-delay: 0.8s; transform: scale(0.5); }
+  .heart:nth-child(10) { left: 95%; animation-duration: 13s; animation-delay: 1.8s; transform: scale(0.9); }
+  .heart:nth-child(11) { left: 10%; animation-duration: 22s; animation-delay: 3s; transform: scale(0.7); }
+  .heart:nth-child(12) { left: 20%; animation-duration: 15s; animation-delay: 2.2s; transform: scale(1.1); }
+  .heart:nth-child(13) { left: 30%; animation-duration: 18s; animation-delay: 0.7s; transform: scale(0.6); }
+  .heart:nth-child(14) { left: 40%; animation-duration: 14s; animation-delay: 1.9s; transform: scale(0.8); }
+  .heart:nth-child(15) { left: 50%; animation-duration: 20s; animation-delay: 2.7s; transform: scale(0.9); }
+  .heart:nth-child(16) { left: 60%; animation-duration: 16s; animation-delay: 1.3s; transform: scale(0.7); }
+  .heart:nth-child(17) { left: 70%; animation-duration: 19s; animation-delay: 0.4s; transform: scale(1.0); }
+  .heart:nth-child(18) { left: 80%; animation-duration: 23s; animation-delay: 2.1s; transform: scale(0.6); }
+  .heart:nth-child(19) { left: 90%; animation-duration: 17s; animation-delay: 1.5s; transform: scale(0.8); }
+  .heart:nth-child(20) { left: 3%; animation-duration: 21s; animation-delay: 0.9s; transform: scale(0.7); }

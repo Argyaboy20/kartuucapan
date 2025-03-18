@@ -1,0 +1,72 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Custom Color to the App */
+:root {
+    --ion-color-love-primary: #d81b60;
+    --ion-color-love-primary-rgb: 216, 27, 96;
+    --ion-color-love-primary-contrast: #ffffff;
+    --ion-color-love-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-love-primary-shade: #be1853;
+    --ion-color-love-primary-tint: #dc3270;
+    
+    --ion-color-love-secondary: #c2185b;
+    --ion-color-love-secondary-rgb: 194, 24, 91;
+    --ion-color-love-secondary-contrast: #ffffff;
+    --ion-color-love-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-love-secondary-shade: #ab1550;
+    --ion-color-love-secondary-tint: #c82f6b;
+  }
+  
+  .ion-color-love-primary {
+    --ion-color-base: var(--ion-color-love-primary);
+    --ion-color-base-rgb: var(--ion-color-love-primary-rgb);
+    --ion-color-contrast: var(--ion-color-love-primary-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-love-primary-contrast-rgb);
+    --ion-color-shade: var(--ion-color-love-primary-shade);
+    --ion-color-tint: var(--ion-color-love-primary-tint);
+  }
+  
+  .ion-color-love-secondary {
+    --ion-color-base: var(--ion-color-love-secondary);
+    --ion-color-base-rgb: var(--ion-color-love-secondary-rgb);
+    --ion-color-contrast: var(--ion-color-love-secondary-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-love-secondary-contrast-rgb);
+    --ion-color-shade: var(--ion-color-love-secondary-shade);
+    --ion-color-tint: var(--ion-color-love-secondary-tint);
+  }

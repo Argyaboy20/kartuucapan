@@ -34,10 +34,10 @@
             "styles": [
               "src/global.scss",
               "src/theme/variables.scss",
-              "node_modules/swiper/swiper.css",
-              "node_modules/swiper/modules/navigation/navigation.css",
-              "node_modules/swiper/modules/pagination/pagination.css",
-              "node_modules/swiper/modules/effect-coverflow/effect-coverflow.css"
+              "~swiper/css",
+              "~swiper/css/navigation",
+              "~swiper/css/pagination",
+              "~swiper/css/effect-coverflow"
             ],
             "scripts": []
           },

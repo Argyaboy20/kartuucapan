@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+// Import Swiper modules yang diperlukan dan register-nya
+import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
+
+// Register Swiper modules
+SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 interface Photo {
   thumbnail: string;
@@ -12,6 +19,7 @@ interface Photo {
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: false,
+  encapsulation: ViewEncapsulation.None, // Tambahkan ini untuk CSS Swiper dapat berfungsi
 })
 export class Tab3Page implements OnInit {
   // Anniversary date
@@ -67,6 +75,26 @@ export class Tab3Page implements OnInit {
   isModalOpen: boolean = false;
   currentIndex: number = 0;
   currentPhoto: Photo | null = null;
+  
+  // Swiper config - Konfigurasi untuk digunakan di template
+  // Fix tipe data untuk effect menjadi 'coverflow' (sesuai enum tipe yang valid)
+  swiperConfig = {
+    effect: 'coverflow' as const, // Definisikan type secara eksplisit
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+    pagination: {
+      clickable: true
+    },
+    navigation: true
+  };
 
   constructor() {}
 

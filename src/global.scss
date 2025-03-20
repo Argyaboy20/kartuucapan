@@ -70,3 +70,93 @@
     --ion-color-shade: var(--ion-color-love-secondary-shade);
     --ion-color-tint: var(--ion-color-love-secondary-tint);
   }
+
+  /* Swiper styles */
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.swiper-pagination {
+  position: relative;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.2;
+  margin: 0 5px;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--ion-color-primary);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  display: inline-flex;
+  margin-inline-start: 40px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-primary);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-family: swiper-icons;
+  font-size: 22px;
+  text-transform: none !important;
+  font-variant: initial;
+}
+
+.swiper-button-prev:after {
+  content: 'prev';
+}
+
+.swiper-button-next:after {
+  content: 'next';
+}
+
+/* Effect Coverflow */
+.swiper-effect-coverflow .swiper-wrapper {
+  perspective: 1200px;
+}
+
+.swiper-effect-coverflow .swiper-slide {
+  transform-style: preserve-3d;
+}

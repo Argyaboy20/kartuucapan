@@ -20,11 +20,24 @@ export class Tab2Page {
   private messageBoxRect: DOMRect | null = null;
   private buttonRect: DOMRect | null = null;
   private buttonContainer: HTMLElement | null = null;
+  // Flag to track if a touch event is in progress
+  private touchInProgress = false;
+  // Flag to detect if we're on mobile
+  private isMobileDevice = false;
 
   constructor(
     private alertController: AlertController,
     private router: Router
-  ) {}
+  ) {
+    // Check if we're on a mobile device
+    this.isMobileDevice = this.checkIfMobile();
+  }
+
+  // Helper function to detect mobile devices
+  checkIfMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.innerWidth <= 768);
+  }
 
   ngAfterViewInit() {
     // Get reference to the button container with null check
@@ -33,10 +46,47 @@ export class Tab2Page {
       this.buttonContainer = buttonContainerElement as HTMLElement;
     }
     
-    // Add mouseover event to the no button
+    // Get reference to the no button
     const noButtonElement = document.querySelector('.no-button');
     if (noButtonElement) {
+      // Add desktop mouseover event
       noButtonElement.addEventListener('mouseover', () => this.moveNoButton());
+      
+      // Add mobile touch events
+      noButtonElement.addEventListener('touchstart', (e) => {
+        // Prevent default to avoid scrolling and clicking
+        e.preventDefault();
+        e.stopPropagation();
+        this.touchInProgress = true;
+        this.moveNoButton();
+        return false;
+      }, { passive: false });
+      
+      // Prevent actual click on mobile
+      noButtonElement.addEventListener('click', (e) => {
+        if (this.isMobileDevice) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        return true; // Menambahkan return value
+      });
+      
+      // Add touchmove event to detect when user tries to follow the button
+      document.addEventListener('touchmove', (e) => {
+        if (this.touchInProgress) {
+          const touch = e.touches[0];
+          const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (elementAtTouch && elementAtTouch.classList.contains('no-button')) {
+            this.moveNoButton();
+          }
+        }
+      }, { passive: true });
+      
+      // Reset touch flag when touch ends
+      document.addEventListener('touchend', () => {
+        this.touchInProgress = false;
+      });
       
       // Initially capture the message box and button sizes for boundary calculations
       setTimeout(() => {
@@ -84,7 +134,7 @@ export class Tab2Page {
   async sayYes() {
     const alert = await this.alertController.create({
       header: 'Yeay!',
-      message: 'Masss juga cayanggg kamuuuu! 💚',
+      message: 'Ayahhh juga cayanggg kamuuuu! 💚',
       buttons: [{
         text: 'OK',
         handler: () => {
@@ -99,6 +149,13 @@ export class Tab2Page {
 
   // Function for when the "NO" button is clicked
   async sayNo() {
+    // On mobile, don't proceed with the click action
+    if (this.isMobileDevice) {
+      this.moveNoButton();
+      return;
+    }
+    
+    // For desktop, proceed as normal
     // Get the current disappointment message based on click count
     const message = this.disappointmentMessages[this.noButtonClickCount];
     

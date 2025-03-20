@@ -34,40 +34,40 @@ export class Tab3Page implements OnInit {
   // Photo gallery
   photos: Photo[] = [
     {
-      thumbnail: 'assets/photos/thumb1.jpg',
-      fullsize: 'assets/photos/photo1.jpg',
-      description: 'Our first date at Central Park',
-      date: 'August 26, 2024'
+      thumbnail: 'assets/baba1.png',
+      fullsize: 'assets/baba1.png',
+      description: 'Baba\'s photo',
+      date: 'May 17, 2024'
     },
     {
-      thumbnail: 'assets/photos/thumb2.jpg',
-      fullsize: 'assets/photos/photo2.jpg',
-      description: 'Beautiful sunset at the beach',
-      date: 'September 10, 2024'
+      thumbnail: 'assets/bubu1.png',
+      fullsize: 'assets/bubu1.png',
+      description: 'Bubu\'s photo',
+      date: 'August 16, 2024' 
     },
     {
-      thumbnail: 'assets/photos/thumb3.jpg',
-      fullsize: 'assets/photos/photo3.jpg',
-      description: 'Movie night under the stars',
-      date: 'September 23, 2024'
+      thumbnail: 'assets/bubu2.png',
+      fullsize: 'assets/bubu2.png',
+      description: 'My cutest bubu',
+      date: 'March 1, 2025'
     },
     {
-      thumbnail: 'assets/photos/thumb4.jpg',
-      fullsize: 'assets/photos/photo4.jpg',
-      description: 'Candlelight dinner for our special day',
-      date: 'October 5, 2024'
+      thumbnail: 'assets/baba2.png',
+      fullsize: 'assets/baba2.png',
+      description: 'Back in nature',
+      date: 'May 3, 2024'
     },
     {
-      thumbnail: 'assets/photos/thumb5.jpg',
-      fullsize: 'assets/photos/photo5.jpg',
+      thumbnail: 'assets/baba3.png',
+      fullsize: 'assets/baba3.png',
       description: 'Hiking adventure in the mountains',
-      date: 'October 19, 2024'
+      date: 'May 18, 2024'
     },
     {
-      thumbnail: 'assets/photos/thumb6.jpg',
-      fullsize: 'assets/photos/photo6.jpg',
-      description: 'Coffee and conversations we cherish',
-      date: 'November 2, 2024'
+      thumbnail: 'assets/bubu3.png',
+      fullsize: 'assets/bubu3.png',
+      description: 'Chill in Mixue',
+      date: 'November 24, 2024'
     }
   ];
   

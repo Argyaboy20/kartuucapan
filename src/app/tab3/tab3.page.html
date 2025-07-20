@@ -25,16 +25,10 @@
 
   <!-- Swiper Container -->
   <!-- Ingat untuk menambahkan class swiper di CSS -->
-  <swiper 
-    [effect]="swiperConfig.effect"
-    [grabCursor]="swiperConfig.grabCursor"
-    [centeredSlides]="swiperConfig.centeredSlides"
-    [slidesPerView]="swiperConfig.slidesPerView"
-    [coverflowEffect]="swiperConfig.coverflowEffect"
-    [pagination]="swiperConfig.pagination"
-    [navigation]="swiperConfig.navigation"
-    class="swiper-container">
-    
+  <swiper [effect]="swiperConfig.effect" [grabCursor]="swiperConfig.grabCursor"
+    [centeredSlides]="swiperConfig.centeredSlides" [slidesPerView]="swiperConfig.slidesPerView"
+    [coverflowEffect]="swiperConfig.coverflowEffect" [pagination]="swiperConfig.pagination" class="swiper-container">
+
     <!-- Section 1: Anniversary Counter Section -->
     <ng-template swiperSlide>
       <ion-card class="love-card">
@@ -48,6 +42,22 @@
               <div class="anniversary-date ion-text-center">
                 <p class="subtitle">Since August 26, 2024</p>
                 <h1>{{ daysCount }} Days</h1>
+                <div class="time-counter">
+                  <div class="time-segment">
+                    <span class="time-value">{{ currentHours.toString().padStart(2, '0') }}</span>
+                    <span class="time-label">Hours</span>
+                  </div>
+                  <div class="time-separator">:</div>
+                  <div class="time-segment">
+                    <span class="time-value">{{ currentMinutes.toString().padStart(2, '0') }}</span>
+                    <span class="time-label">Minutes</span>
+                  </div>
+                  <div class="time-separator">:</div>
+                  <div class="time-segment">
+                    <span class="time-value">{{ currentSeconds.toString().padStart(2, '0') }}</span>
+                    <span class="time-label">Seconds</span>
+                  </div>
+                </div>  
                 <p class="love-quote">of endless love and cherished moments</p>
                 <div class="monthly-reminder ion-text-center" *ngIf="showMonthlyReminder">
                   <p class="reminder-text">💖 Happy {{ monthsCount }}-Month Anniversary! 💖</p>

@@ -30,7 +30,10 @@ export class Tab3Page implements OnInit {
   daysToNextMilestone: number = 0;
   showMonthlyReminder: boolean = false;
   nextMonthlyDate: Date = new Date();
-  
+  currentHours: number = 0;
+  currentMinutes: number = 0;
+  currentSeconds: number = 0;
+
   // Photo gallery
   photos: Photo[] = [
     {
@@ -43,7 +46,7 @@ export class Tab3Page implements OnInit {
       thumbnail: 'assets/bubu1.png',
       fullsize: 'assets/bubu1.png',
       description: 'Bubu\'s photo',
-      date: 'August 16, 2024' 
+      date: 'August 16, 2024'
     },
     {
       thumbnail: 'assets/bubu2.png',
@@ -70,12 +73,12 @@ export class Tab3Page implements OnInit {
       date: 'November 24, 2024'
     }
   ];
-  
+
   // Modal controls
   isModalOpen: boolean = false;
   currentIndex: number = 0;
   currentPhoto: Photo | null = null;
-  
+
   // Swiper config - Konfigurasi untuk digunakan di template
   // Fix tipe data untuk effect menjadi 'coverflow' (sesuai enum tipe yang valid)
   swiperConfig = {
@@ -96,17 +99,17 @@ export class Tab3Page implements OnInit {
     navigation: true
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     // Update the counter initially
     this.updateDaysCount();
-    
+
     // Update the counter every hour
     setInterval(() => {
       this.updateDaysCount();
-    }, 3600000); // 1 hour in milliseconds
-    
+    }, 1000); // 1 hour in milliseconds
+
     // Check for monthly anniversary
     this.checkMonthlyAnniversary();
   }
@@ -115,48 +118,53 @@ export class Tab3Page implements OnInit {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - this.anniversaryDate.getTime());
     this.daysCount = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    
+
+    // Get current real time
+    this.currentHours = now.getHours();
+    this.currentMinutes = now.getMinutes();
+    this.currentSeconds = now.getSeconds();
+
     // Calculate months count
     this.calculateMonthsCount();
-    
+
     // Calculate next milestone
     this.calculateNextMilestone();
   }
-  
+
   calculateMonthsCount() {
     const now = new Date();
     const years = now.getFullYear() - this.anniversaryDate.getFullYear();
     let months = now.getMonth() - this.anniversaryDate.getMonth();
-    
+
     if (months < 0) {
       months += 12;
       months += (years - 1) * 12;
     } else {
       months += years * 12;
     }
-    
+
     // Adjust for day of month
     if (now.getDate() < this.anniversaryDate.getDate()) {
       months--;
     }
-    
+
     this.monthsCount = months;
   }
-  
+
   checkMonthlyAnniversary() {
     const now = new Date();
     // Show reminder if it's the 26th of any month
     this.showMonthlyReminder = now.getDate() === this.anniversaryDate.getDate();
-    
+
     // Calculate the next monthly anniversary date
     let nextMonth = new Date(now.getFullYear(), now.getMonth(), this.anniversaryDate.getDate());
-    if (now.getDate() > this.anniversaryDate.getDate() || 
-       (now.getDate() === this.anniversaryDate.getDate() && 
+    if (now.getDate() > this.anniversaryDate.getDate() ||
+      (now.getDate() === this.anniversaryDate.getDate() &&
         now.getHours() >= 23 && now.getMinutes() >= 59)) {
       nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
     }
     this.nextMonthlyDate = nextMonth;
-    
+
     // Check monthly anniversary status daily
     setTimeout(() => {
       this.checkMonthlyAnniversary();
@@ -170,14 +178,16 @@ export class Tab3Page implements OnInit {
       { days: 100, name: '100 Days Together' },
       { days: 180, name: '6 Months Anniversary' },
       { days: 365, name: '1 Year Anniversary' },
-      { days: 500, name: '500 Days of Love' },
+      { days: 400, name: '400 Days of Love' },
+      { days: 500, name: '500 Days Together' },
+      { days: 700, name: '700 Days of Love' },
       { days: 730, name: '2 Years Anniversary' },
       { days: 1095, name: '3 Years Anniversary' },
       { days: 1460, name: '4 Years Anniversary' },
       { days: 1825, name: '5 Years Anniversary' },
       { days: 3650, name: '10 Years Anniversary' }
     ];
-    
+
     for (const milestone of milestones) {
       if (this.daysCount < milestone.days) {
         this.nextMilestone = milestone.name;
@@ -185,7 +195,7 @@ export class Tab3Page implements OnInit {
         return;
       }
     }
-    
+
     // If no upcoming milestone is found, calculate the next anniversary
     const yearsPassed = Math.floor(this.daysCount / 365);
     const nextYearAnniversary = (yearsPassed + 1) * 365;
@@ -198,11 +208,11 @@ export class Tab3Page implements OnInit {
     this.currentPhoto = this.photos[index];
     this.isModalOpen = true;
   }
-  
+
   closePhotoModal() {
     this.isModalOpen = false;
   }
-  
+
   nextPhoto() {
     if (this.currentIndex < this.photos.length - 1) {
       this.currentIndex++;

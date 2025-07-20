@@ -36,8 +36,8 @@
 /* Pastikan Swiper container memiliki tinggi yang cukup */
 .swiper-container {
     width: 100%;
-    height: 85vh;
-    margin: 0 auto;
+    height: 100vh;
+    margin: -20px auto;
     padding: 20px 0;
 }
 
@@ -52,26 +52,6 @@
 :host ::ng-deep .swiper-pagination-bullet-active {
     background-color: var(--ion-color-love-primary, #ff6b6b);
     opacity: 1;
-}
-
-/* Styling untuk navigation arrows */
-:host ::ng-deep .swiper-button-next,
-:host ::ng-deep .swiper-button-prev {
-    color: var(--ion-color-love-primary, #ff6b6b);
-    background-color: rgba(255, 255, 255, 0.5);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-:host ::ng-deep .swiper-button-next:after,
-:host ::ng-deep .swiper-button-prev:after {
-    font-size: 20px;
-}
-
-:host ::ng-deep .swiper-button-next:hover,
-:host ::ng-deep .swiper-button-prev:hover {
-    background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Styling untuk slide */
@@ -276,8 +256,75 @@
         }
 
         .love-quote {
+            margin-top: 8px;
             font-size: 0.9rem;
             color: #c2185b;
+        }
+
+        .time-counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 105, 180, 0.2));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+
+            .time-segment {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-width: 60px;
+
+                .time-value {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: #d81b60;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+                    animation: pulse-number 1s ease-in-out infinite;
+                }
+
+                .time-label {
+                    font-size: 0.7rem;
+                    color: #ad1457;
+                    font-weight: 500;
+                    margin-top: 2px;
+                }
+            }
+
+            .time-separator {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #ff69b4;
+                margin: 0 10px;
+                animation: blink 1s infinite;
+            }
+        }
+
+        @keyframes pulse-number {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0.3;
+            }
         }
     }
 

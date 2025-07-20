@@ -18,6 +18,6 @@ export class Tab1Page implements OnInit {
   }
 
   goToTab2() {
-    this.navCtrl.navigateForward('/tabs/tab2');
+    this.navCtrl.navigateForward('/confirmation');
   }
 }

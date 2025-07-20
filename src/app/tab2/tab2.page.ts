@@ -139,7 +139,7 @@ export class Tab2Page {
         text: 'OK',
         handler: () => {
           // Navigate to tab3 when OK is clicked
-          this.router.navigate(['/tabs/tab3']);
+          this.router.navigate(['/lovestory']);
         }
       }]
     });

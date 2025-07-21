@@ -33,6 +33,7 @@ export class Tab3Page implements OnInit {
   currentHours: number = 0;
   currentMinutes: number = 0;
   currentSeconds: number = 0;
+   private updateInterval: any;
 
   // Photo gallery
   photos: Photo[] = [
@@ -106,8 +107,9 @@ export class Tab3Page implements OnInit {
     this.updateDaysCount();
 
     // Update the counter every hour
-    setInterval(() => {
+   this.updateInterval = setInterval(() => {
       this.updateDaysCount();
+      this.checkMonthlyAnniversary();
     }, 1000); // 1 hour in milliseconds
 
     // Check for monthly anniversary
@@ -116,7 +118,10 @@ export class Tab3Page implements OnInit {
 
   updateDaysCount() {
     const now = new Date();
-    const diffTime = Math.abs(now.getTime() - this.anniversaryDate.getTime());
+    const anniversaryStartOfDay = new Date(this.anniversaryDate.getFullYear(), this.anniversaryDate.getMonth(), this.anniversaryDate.getDate()); //
+    const nowStartOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
+
+    const diffTime = nowStartOfDay.getTime() - anniversaryStartOfDay.getTime();
     this.daysCount = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
     // Get current real time
@@ -156,19 +161,19 @@ export class Tab3Page implements OnInit {
     // Show reminder if it's the 26th of any month
     this.showMonthlyReminder = now.getDate() === this.anniversaryDate.getDate();
 
-    // Calculate the next monthly anniversary date
+    // Hitung tanggal anniversary bulanan berikutnya
     let nextMonth = new Date(now.getFullYear(), now.getMonth(), this.anniversaryDate.getDate());
-    if (now.getDate() > this.anniversaryDate.getDate() ||
-      (now.getDate() === this.anniversaryDate.getDate() &&
-        now.getHours() >= 23 && now.getMinutes() >= 59)) {
+    if (now.getDate() > this.anniversaryDate.getDate()) {
+      // Jika tanggal saat ini sudah melewati tanggal anniversary, next anniversary di bulan berikutnya
       nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
+    } else if (now.getDate() === this.anniversaryDate.getDate() && 
+               (now.getHours() > this.anniversaryDate.getHours() || 
+                (now.getHours() === this.anniversaryDate.getHours() && now.getMinutes() >= this.anniversaryDate.getMinutes() && now.getSeconds() >= this.anniversaryDate.getSeconds()))) { //
+        // Jika sudah di tanggal anniversary tapi waktu sudah melewati waktu anniversary di hari itu,
+        // maka anniversary bulanan berikutnya adalah bulan depan.
+        nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
     }
     this.nextMonthlyDate = nextMonth;
-
-    // Check monthly anniversary status daily
-    setTimeout(() => {
-      this.checkMonthlyAnniversary();
-    }, 86400000); // 24 hours in milliseconds
   }
 
   calculateNextMilestone() {

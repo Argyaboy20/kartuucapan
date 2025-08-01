@@ -41,6 +41,13 @@
             <div class="heart-border">
               <div class="anniversary-date ion-text-center">
                 <p class="subtitle">Since August 26, 2024</p>
+
+                <!-- Current date display dengan format dd/mm/yy -->
+                <div class="current-date">
+                  <span class="date-label">Today:</span>
+                  <span class="date-value">{{ currentDate }}</span>
+                </div>
+
                 <h1>{{ daysCount }} Days</h1>
                 <div class="time-counter">
                   <div class="time-segment">
@@ -57,7 +64,7 @@
                     <span class="time-value">{{ currentSeconds.toString().padStart(2, '0') }}</span>
                     <span class="time-label">Seconds</span>
                   </div>
-                </div>  
+                </div>
                 <p class="love-quote">of endless love and cherished moments</p>
                 <div class="monthly-reminder ion-text-center" *ngIf="showMonthlyReminder">
                   <p class="reminder-text">💖 Happy {{ monthsCount }}-Month Anniversary! 💖</p>

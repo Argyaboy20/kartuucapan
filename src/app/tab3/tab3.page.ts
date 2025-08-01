@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 // Import Swiper modules yang diperlukan dan register-nya
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
@@ -21,7 +21,7 @@ interface Photo {
   standalone: false,
   encapsulation: ViewEncapsulation.None, // Tambahkan ini untuk CSS Swiper dapat berfungsi
 })
-export class Tab3Page implements OnInit {
+export class Tab3Page implements OnInit, OnDestroy {
   // Anniversary date
   anniversaryDate: Date = new Date('2024-08-26');
   daysCount: number = 0;
@@ -33,7 +33,9 @@ export class Tab3Page implements OnInit {
   currentHours: number = 0;
   currentMinutes: number = 0;
   currentSeconds: number = 0;
-   private updateInterval: any;
+  private updateInterval: any;
+  currentDate: string = '';
+  private notificationPermission: boolean = false;
 
   // Photo gallery
   photos: Photo[] = [
@@ -102,24 +104,91 @@ export class Tab3Page implements OnInit {
 
   constructor() { }
 
+  /* Cleanup interval saat component destroy */
+  ngOnDestroy(): void {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+
   ngOnInit() {
-    // Update the counter initially
+    /* Update the counter initially */
     this.updateDaysCount();
 
-    // Update the counter every hour
-   this.updateInterval = setInterval(() => {
-      this.updateDaysCount();
-      this.checkMonthlyAnniversary();
-    }, 1000); // 1 hour in milliseconds
+    /* Request notification permission */
+    this.requestNotificationPermission();
 
-    // Check for monthly anniversary
+    /* Update the counter every second for real-time updates */
+    this.updateInterval = setInterval(() => {
+      this.updateDaysCount();
+      this.updateCurrentDate();
+      this.checkMonthlyAnniversary();
+      this.checkAnniversaryNotification();
+    }, 1000);
+
+    /* Check for monthly anniversary */
     this.checkMonthlyAnniversary();
+
+    /* Update current date initially */
+    this.updateCurrentDate();
+  }
+
+  /* Method untuk update tanggal realtime dengan format dd/mm/yy */
+  private updateCurrentDate(): void {
+    const now = new Date();
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const year = now.getFullYear().toString().slice(-2);
+    this.currentDate = `${day}/${month}/${year}`;
+  }
+
+  /* Method untuk request permission notifikasi */
+  private async requestNotificationPermission(): Promise<void> {
+    if ('Notification' in window) {
+      const permission = await Notification.requestPermission();
+      this.notificationPermission = permission === 'granted';
+    }
+  }
+
+  /* Method untuk cek dan kirim notifikasi anniversary */
+  private checkAnniversaryNotification(): void {
+    const now = new Date();
+
+    /* Cek apakah tanggal 26 dan jam 5 pagi */
+    if (now.getDate() === 26 && now.getHours() === 5 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+      this.sendAnniversaryNotification();
+    }
+  }
+
+  /* Method untuk mengirim notifikasi anniversary */
+  private sendAnniversaryNotification(): void {
+    if (this.notificationPermission && 'Notification' in window) {
+      const notification = new Notification('Anniversary Reminder 💖', {
+        body: 'Halo cayangg! Tebak hari ini hari apaa? Yak betul, hari anniversary kita!',
+        icon: 'assets/icon/favicon.png', /* Sesuaikan dengan path icon Anda */
+        badge: 'assets/icon/favicon.png',
+        tag: 'anniversary-reminder',
+        requireInteraction: true,
+        silent: false
+      });
+
+      /* Auto close notification after 10 seconds */
+      setTimeout(() => {
+        notification.close();
+      }, 10000);
+
+      /* Handle notification click */
+      notification.onclick = () => {
+        window.focus();
+        notification.close();
+      };
+    }
   }
 
   updateDaysCount() {
     const now = new Date();
     const anniversaryStartOfDay = new Date(this.anniversaryDate.getFullYear(), this.anniversaryDate.getMonth(), this.anniversaryDate.getDate()); //
-    const nowStartOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
+    const nowStartOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     const diffTime = nowStartOfDay.getTime() - anniversaryStartOfDay.getTime();
     this.daysCount = Math.floor(diffTime / (1000 * 60 * 60 * 24));
@@ -166,12 +235,12 @@ export class Tab3Page implements OnInit {
     if (now.getDate() > this.anniversaryDate.getDate()) {
       // Jika tanggal saat ini sudah melewati tanggal anniversary, next anniversary di bulan berikutnya
       nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
-    } else if (now.getDate() === this.anniversaryDate.getDate() && 
-               (now.getHours() > this.anniversaryDate.getHours() || 
-                (now.getHours() === this.anniversaryDate.getHours() && now.getMinutes() >= this.anniversaryDate.getMinutes() && now.getSeconds() >= this.anniversaryDate.getSeconds()))) { //
-        // Jika sudah di tanggal anniversary tapi waktu sudah melewati waktu anniversary di hari itu,
-        // maka anniversary bulanan berikutnya adalah bulan depan.
-        nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
+    } else if (now.getDate() === this.anniversaryDate.getDate() &&
+      (now.getHours() > this.anniversaryDate.getHours() ||
+        (now.getHours() === this.anniversaryDate.getHours() && now.getMinutes() >= this.anniversaryDate.getMinutes() && now.getSeconds() >= this.anniversaryDate.getSeconds()))) { //
+      // Jika sudah di tanggal anniversary tapi waktu sudah melewati waktu anniversary di hari itu,
+      // maka anniversary bulanan berikutnya adalah bulan depan.
+      nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, this.anniversaryDate.getDate());
     }
     this.nextMonthlyDate = nextMonth;
   }

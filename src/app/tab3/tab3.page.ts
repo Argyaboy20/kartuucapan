@@ -254,12 +254,23 @@ export class Tab3Page implements OnInit, OnDestroy {
       { days: 365, name: '1 Year Anniversary' },
       { days: 400, name: '400 Days of Love' },
       { days: 500, name: '500 Days Together' },
-      { days: 700, name: '700 Days of Love' },
-      { days: 730, name: '2 Years Anniversary' },
-      { days: 1095, name: '3 Years Anniversary' },
-      { days: 1460, name: '4 Years Anniversary' },
-      { days: 1825, name: '5 Years Anniversary' },
-      { days: 3650, name: '10 Years Anniversary' }
+      { days: 730, name: '2 Years Anniversary 🎊' },
+      { days: 1095, name: '3 Years Anniversary 🎊' },
+      { days: 1460, name: '4 Years Anniversary 🎊' },
+      { days: 1825, name: '5 Years Anniversary 🎊' },
+      { days: 2190, name: '6 Years Anniversary 🎊' },
+      { days: 2555, name: '7 Years Anniversary 🎊' },
+      { days: 2920, name: '8 Years Anniversary 🎊' },
+      { days: 3285, name: '9 Years Anniversary 🎊' },
+      { days: 3650, name: '10 Years Anniversary 🎊' },
+      { days: 4015, name: '11 Years Anniversary 🎊' },
+      { days: 4380, name: '12 Years Anniversary 🎊' },
+      { days: 4745, name: '13 Years Anniversary 🎊' },
+      { days: 5110, name: '14 Years Anniversary 🎊' },
+      { days: 5475, name: '15 Years Anniversary 🎊' },
+      { days: 7300, name: '20 Years Anniversary 🎊' },
+      { days: 9125, name: '25 Years Anniversary 🎊' },
+      { days: 10950, name: '30 Years Anniversary 🎊' }
     ];
 
     for (const milestone of milestones) {
@@ -273,7 +284,7 @@ export class Tab3Page implements OnInit, OnDestroy {
     // If no upcoming milestone is found, calculate the next anniversary
     const yearsPassed = Math.floor(this.daysCount / 365);
     const nextYearAnniversary = (yearsPassed + 1) * 365;
-    this.nextMilestone = `${yearsPassed + 1} Years Anniversary`;
+    this.nextMilestone = `${yearsPassed + 1} Years Anniversary 🎊`;
     this.daysToNextMilestone = nextYearAnniversary - this.daysCount;
   }
 

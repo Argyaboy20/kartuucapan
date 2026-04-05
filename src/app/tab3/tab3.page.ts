@@ -207,22 +207,18 @@ export class Tab3Page implements OnInit, OnDestroy {
 
   calculateMonthsCount() {
     const now = new Date();
-    const years = now.getFullYear() - this.anniversaryDate.getFullYear();
+    let years = now.getFullYear() - this.anniversaryDate.getFullYear();
     let months = now.getMonth() - this.anniversaryDate.getMonth();
 
-    if (months < 0) {
-      months += 12;
-      months += (years - 1) * 12;
-    } else {
-      months += years * 12;
-    }
+    // Gabung total bulan dari tahun + bulan
+    let totalMonths = years * 12 + months;
 
-    // Adjust for day of month
+    // Kurangi 1 jika hari ini belum sampai tanggal anniversary di bulan ini
     if (now.getDate() < this.anniversaryDate.getDate()) {
-      months--;
+      totalMonths--;
     }
 
-    this.monthsCount = months;
+    this.monthsCount = totalMonths;
   }
 
   checkMonthlyAnniversary() {

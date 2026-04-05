@@ -67,7 +67,14 @@
                 </div>
                 <p class="love-quote">of endless love and cherished moments</p>
                 <div class="monthly-reminder ion-text-center" *ngIf="showMonthlyReminder">
-                  <p class="reminder-text">💖 Happy {{ monthsCount }}-Month Anniversary! 💖</p>
+                  <p class="reminder-text">
+                    💖 Happy
+                    <ng-container *ngIf="monthsCount % 12 === 0; else monthLabel">
+                      {{ monthsCount / 12 }} Year{{ monthsCount / 12 > 1 ? 's' : '' }}
+                    </ng-container>
+                    <ng-template #monthLabel>{{ monthsCount }}-Month</ng-template>
+                    Anniversary! 💖
+                  </p>
                   <p class="reminder-date">{{ nextMonthlyDate | date:'longDate' }}</p>
                 </div>
               </div>
